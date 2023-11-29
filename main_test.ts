@@ -28,3 +28,33 @@ Deno.test(function linkedListTest() {
   assertEquals(linkedList.find("zeroth"), 0);
   assertEquals(linkedList.toString(), "( zeroth ) -> ( first ) -> null");
 });
+
+Deno.test(function emptyLinkedListTest() {
+  const linkedList = createLinkedList();
+  assertEquals(linkedList.size(), 0);
+  assertEquals(linkedList.head(), null);
+  assertEquals(linkedList.tail(), null);
+  assertEquals(linkedList.at(0), null);
+  assertEquals(linkedList.contains(0), false);
+  assertEquals(linkedList.find(0), null);
+  assertEquals(linkedList.toString(), "null");
+  assertEquals(linkedList.pop(), null);
+});
+
+Deno.test(function singleLinkedListTest() {
+  const linkedList = createLinkedList();
+  linkedList.append(1);
+  assertEquals(linkedList.size(), 1);
+  assertEquals(linkedList.head().getValue(), 1);
+  assertEquals(linkedList.tail().getValue(), 1);
+  assertEquals(linkedList.at(0).getValue(), 1);
+  assertEquals(linkedList.at(1), null);
+  assertEquals(linkedList.at(-1), null);
+  assertEquals(linkedList.contains(1), true);
+  assertEquals(linkedList.contains("1"), false);
+  assertEquals(linkedList.find(1), 0);
+  assertEquals(linkedList.find("1"), null);
+  assertEquals(linkedList.toString(), "( 1 ) -> null");
+  assertEquals(linkedList.pop().getValue(), 1);
+  assertEquals(linkedList.size(), 0);
+});
