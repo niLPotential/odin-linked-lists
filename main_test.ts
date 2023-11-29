@@ -23,4 +23,7 @@ Deno.test(function linkedListTest() {
   assertEquals(linkedList.contains("second"), false);
   assertEquals(linkedList.contains("first"), true);
   assertEquals(linkedList.contains("zeroth"), true);
+  assertEquals(linkedList.find("second"), null);
+  assertEquals(linkedList.find("first"), 1);
+  assertEquals(linkedList.find("zeroth"), 0);
 });

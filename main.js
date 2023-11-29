@@ -86,7 +86,23 @@ export function createLinkedList() {
     return false;
   }
 
-  return { append, prepend, size, head, tail, at, pop, contains };
+  function find(value) {
+    let node = this.head();
+    if (node.getValue() === value) {
+      return 0;
+    }
+    let index = 0;
+    while (node.getNextNode() !== null) {
+      index++;
+      node = node.getNextNode();
+      if (node.getValue() === value) {
+        return index;
+      }
+    }
+    return null;
+  }
+
+  return { append, prepend, size, head, tail, at, pop, contains, find };
 }
 
 function createNode() {
