@@ -26,4 +26,5 @@ Deno.test(function linkedListTest() {
   assertEquals(linkedList.find("second"), null);
   assertEquals(linkedList.find("first"), 1);
   assertEquals(linkedList.find("zeroth"), 0);
+  assertEquals(linkedList.toString(), "( zeroth ) -> ( first ) -> null");
 });

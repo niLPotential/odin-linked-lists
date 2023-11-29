@@ -102,7 +102,30 @@ export function createLinkedList() {
     return null;
   }
 
-  return { append, prepend, size, head, tail, at, pop, contains, find };
+  function toString() {
+    let str = "";
+    let node = this.head();
+    str += `( ${node.getValue()} ) -> `;
+    while (node.getNextNode() !== null) {
+      node = node.getNextNode();
+      str += `( ${node.getValue()} ) -> `;
+    }
+    str += "null";
+    return str;
+  }
+
+  return {
+    append,
+    prepend,
+    size,
+    head,
+    tail,
+    at,
+    pop,
+    contains,
+    find,
+    toString,
+  };
 }
 
 function createNode() {
