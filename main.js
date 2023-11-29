@@ -4,7 +4,7 @@ export function createLinkedList() {
   function append(value) {
     const newNode = createNode();
     newNode.setValue(value);
-    if (headNode === null) {
+    if (this.head() === null) {
       headNode = newNode;
     } else {
       this.tail().setNextNode(newNode);
@@ -14,7 +14,7 @@ export function createLinkedList() {
   function prepend(value) {
     const newNode = createNode();
     newNode.setValue(value);
-    if (headNode === null) {
+    if (this.head() === null) {
       headNode = newNode;
     } else {
       newNode.setNextNode(this.head());
@@ -23,11 +23,11 @@ export function createLinkedList() {
   }
 
   function size() {
-    if (headNode === null) {
+    if (this.head() === null) {
       return 0;
     }
     let result = 1;
-    let node = headNode;
+    let node = this.head();
     while (node.getNextNode() !== null) {
       node = node.getNextNode();
       result++;
@@ -40,17 +40,27 @@ export function createLinkedList() {
   }
 
   function tail() {
-    if (headNode === null) {
+    if (this.head() === null) {
       return null;
     }
-    let node = headNode;
+    let node = this.head();
     while (node.getNextNode() !== null) {
       node = node.getNextNode();
     }
     return node;
   }
 
-  return { append, prepend, size, head, tail };
+  function at(index) {
+    let i = 0;
+    let node = this.head();
+    while (i < index && node.getNextNode() !== null) {
+      node = node.getNextNode();
+      i++;
+    }
+    return node;
+  }
+
+  return { append, prepend, size, head, tail, at };
 }
 
 function createNode() {
