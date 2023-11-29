@@ -11,6 +11,17 @@ export function createLinkedList() {
     }
   }
 
+  function prepend(value) {
+    const newNode = createNode();
+    newNode.setValue(value);
+    if (headNode === null) {
+      headNode = newNode;
+    } else {
+      newNode.setNextNode(this.head());
+      headNode = newNode;
+    }
+  }
+
   function size() {
     if (headNode === null) {
       return 0;
@@ -39,7 +50,7 @@ export function createLinkedList() {
     return node;
   }
 
-  return { append, size, head, tail };
+  return { append, prepend, size, head, tail };
 }
 
 function createNode() {
