@@ -7,7 +7,7 @@ export function createLinkedList() {
     if (headNode === null) {
       headNode = newNode;
     } else {
-      this.tail().nextNode = newNode;
+      this.tail().setNextNode(newNode);
     }
   }
 
@@ -33,8 +33,8 @@ export function createLinkedList() {
       return null;
     }
     let node = headNode;
-    while (node.nextNode !== null) {
-      node = node.nextNode;
+    while (node.getNextNode() !== null) {
+      node = node.getNextNode();
     }
     return node;
   }
