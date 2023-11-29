@@ -60,7 +60,18 @@ export function createLinkedList() {
     return node;
   }
 
-  return { append, prepend, size, head, tail, at };
+  function pop() {
+    let previousNode = null;
+    let node = this.head();
+    while (node.getNextNode() !== null) {
+      previousNode = node;
+      node = node.getNextNode();
+    }
+    previousNode.setNextNode(null);
+    return node;
+  }
+
+  return { append, prepend, size, head, tail, at, pop };
 }
 
 function createNode() {

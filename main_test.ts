@@ -17,5 +17,6 @@ Deno.test(function linkedListTest() {
   assertEquals(linkedList.size(), 3);
   assertEquals(linkedList.at(1).getValue(), "first");
   assertEquals(linkedList.at(2).getValue(), "second");
-  assertEquals(linkedList.tail().getValue(), "second");
+  assertEquals(linkedList.pop().getValue(), "second");
+  assertEquals(linkedList.tail().getValue(), "first");
 });
