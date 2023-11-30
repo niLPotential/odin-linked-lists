@@ -74,7 +74,7 @@ export function createLinkedList() {
     let node = this.head();
     if (this.head().getNextNode() === null) {
       headNode = null;
-      return node;
+      return node.getValue();
     }
     let previousNode = null;
     while (node.getNextNode() !== null) {
@@ -83,7 +83,7 @@ export function createLinkedList() {
     }
 
     previousNode.setNextNode(null);
-    return node;
+    return node.getValue();
   }
 
   function contains(value) {

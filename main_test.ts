@@ -17,7 +17,7 @@ Deno.test(function linkedListTest() {
   assertEquals(linkedList.size(), 3);
   assertEquals(linkedList.at(1).getValue(), "first");
   assertEquals(linkedList.at(2).getValue(), "second");
-  assertEquals(linkedList.pop().getValue(), "second");
+  assertEquals(linkedList.pop(), "second");
   assertEquals(linkedList.tail().getValue(), "first");
   assertEquals(linkedList.size(), 2);
   assertEquals(linkedList.contains("second"), false);
@@ -55,6 +55,6 @@ Deno.test(function singleLinkedListTest() {
   assertEquals(linkedList.find(1), 0);
   assertEquals(linkedList.find("1"), null);
   assertEquals(linkedList.toString(), "( 1 ) -> null");
-  assertEquals(linkedList.pop().getValue(), 1);
+  assertEquals(linkedList.pop(), 1);
   assertEquals(linkedList.size(), 0);
 });
