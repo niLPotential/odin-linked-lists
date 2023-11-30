@@ -51,11 +51,18 @@ export function createLinkedList() {
   }
 
   function at(index) {
+    if (index < 0) {
+      return null;
+    }
     let i = 0;
     let node = this.head();
-    while (i < index && node.getNextNode() !== null) {
-      node = node.getNextNode();
-      i++;
+    while (i < index) {
+      if (node.getNextNode() === null) {
+        return null;
+      } else {
+        node = node.getNextNode();
+        i++;
+      }
     }
     return node;
   }
@@ -64,12 +71,17 @@ export function createLinkedList() {
     if (this.head() === null) {
       return null;
     }
-    let previousNode = null;
     let node = this.head();
+    if (this.head().getNextNode() === null) {
+      headNode = null;
+      return node;
+    }
+    let previousNode = null;
     while (node.getNextNode() !== null) {
       previousNode = node;
       node = node.getNextNode();
     }
+
     previousNode.setNextNode(null);
     return node;
   }
