@@ -138,7 +138,23 @@ export function createLinkedList() {
     return str;
   }
 
-  function insertAt(value, index) {}
+  function insertAt(value, index) {
+    if (index < 0) {
+      return;
+    }
+    if (this.size() < index) {
+      return;
+    }
+    const newNode = createNode();
+    newNode.setValue(value);
+    if (index === 0) {
+      newNode.setNextNode(this.head());
+      headNode = newNode;
+      return;
+    }
+    newNode.setNextNode(this.at(index));
+    this.at(index - 1).setNextNode(newNode);
+  }
 
   function removeAt(index) {
     if (index < 0) {

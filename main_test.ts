@@ -62,6 +62,45 @@ Deno.test(function singleLinkedListTest() {
   assertEquals(linkedList.size(), 0);
 });
 
+//Tests for insertAt
+Deno.test(function insertAtLinkedListTest() {
+  const linkedList = createLinkedList();
+  const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  for (const value in values) {
+    linkedList.append(value);
+  }
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+
+  linkedList.insertAt(99, -1); // Does nothing with negative indices
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.insertAt(99, linkedList.size() + 1); // Does nothing when index exceeds size
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.insertAt(99, 5); // Insert at index 5
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 99 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.insertAt(88, 0); //Insert at head
+  assertEquals(
+    linkedList.toString(),
+    "( 88 ) -> ( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 99 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.insertAt(77, linkedList.size()); // Insert at tail
+  assertEquals(
+    linkedList.toString(),
+    "( 88 ) -> ( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 99 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> ( 77 ) -> null"
+  );
+});
+
 // Tests for removeAt
 Deno.test(function removeAtLinkedListTest() {
   const linkedList = createLinkedList();
