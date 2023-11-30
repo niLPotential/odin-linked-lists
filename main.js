@@ -138,6 +138,23 @@ export function createLinkedList() {
     return str;
   }
 
+  function insertAt(value, index) {}
+
+  function removeAt(index) {
+    if (index < 0) {
+      return;
+    }
+    if (index === 0) {
+      headNode = this.at(1);
+      return;
+    }
+    if (this.size() < index) {
+      return;
+    }
+
+    this.at(index - 1).setNextNode(this.at(index + 1));
+  }
+
   return {
     append,
     prepend,
@@ -149,6 +166,8 @@ export function createLinkedList() {
     contains,
     find,
     toString,
+    insertAt,
+    removeAt,
   };
 }
 

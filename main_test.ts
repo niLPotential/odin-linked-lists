@@ -1,34 +1,36 @@
 import { assertEquals } from "https://deno.land/std@0.208.0/assert/mod.ts";
 import { createLinkedList } from "./main.js";
 
+// General Tests
 Deno.test(function linkedListTest() {
   const linkedList = createLinkedList();
 
-  linkedList.append("first");
-  assertEquals(linkedList.head().getValue(), "first");
-  assertEquals(linkedList.size(), 1);
+  linkedList.append("first"); // Append to empty list
+  assertEquals(linkedList.head().getValue(), "first"); // Get value of head node
+  assertEquals(linkedList.size(), 1); // Size of list
 
-  linkedList.append("second");
-  assertEquals(linkedList.tail().getValue(), "second");
-  assertEquals(linkedList.size(), 2);
+  linkedList.append("second"); // Append to filled list
+  assertEquals(linkedList.tail().getValue(), "second"); // Get value of tail node
+  assertEquals(linkedList.size(), 2); // Size of  list
 
-  linkedList.prepend("zeroth");
+  linkedList.prepend("zeroth"); // Prepend to filled list
   assertEquals(linkedList.head().getValue(), "zeroth");
   assertEquals(linkedList.size(), 3);
-  assertEquals(linkedList.at(1).getValue(), "first");
+  assertEquals(linkedList.at(1).getValue(), "first"); // Get value of ith node
   assertEquals(linkedList.at(2).getValue(), "second");
-  assertEquals(linkedList.pop(), "second");
+  assertEquals(linkedList.pop(), "second"); // Remove tail node and return its value
   assertEquals(linkedList.tail().getValue(), "first");
   assertEquals(linkedList.size(), 2);
-  assertEquals(linkedList.contains("second"), false);
+  assertEquals(linkedList.contains("zeroth"), true); // Checks if value is in list
   assertEquals(linkedList.contains("first"), true);
-  assertEquals(linkedList.contains("zeroth"), true);
-  assertEquals(linkedList.find("second"), null);
+  assertEquals(linkedList.contains("second"), false);
+  assertEquals(linkedList.find("zeroth"), 0); // Find index of value in list otherwise return null
   assertEquals(linkedList.find("first"), 1);
-  assertEquals(linkedList.find("zeroth"), 0);
-  assertEquals(linkedList.toString(), "( zeroth ) -> ( first ) -> null");
+  assertEquals(linkedList.find("second"), null);
+  assertEquals(linkedList.toString(), "( zeroth ) -> ( first ) -> null"); // Print list as string
 });
 
+// Tests for empty list
 Deno.test(function emptyLinkedListTest() {
   const linkedList = createLinkedList();
   assertEquals(linkedList.size(), 0);
@@ -41,6 +43,7 @@ Deno.test(function emptyLinkedListTest() {
   assertEquals(linkedList.pop(), null);
 });
 
+// Tests for list with single node
 Deno.test(function singleLinkedListTest() {
   const linkedList = createLinkedList();
   linkedList.append(1);
@@ -57,4 +60,43 @@ Deno.test(function singleLinkedListTest() {
   assertEquals(linkedList.toString(), "( 1 ) -> null");
   assertEquals(linkedList.pop(), 1);
   assertEquals(linkedList.size(), 0);
+});
+
+// Tests for removeAt
+Deno.test(function removeAtLinkedListTest() {
+  const linkedList = createLinkedList();
+  const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  for (const value in values) {
+    linkedList.append(value);
+  }
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+
+  linkedList.removeAt(-1); // Does nothing with negative indices
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.removeAt(3); // Remove index 3
+  assertEquals(
+    linkedList.toString(),
+    "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.removeAt(0); // Remove head node
+  assertEquals(
+    linkedList.toString(),
+    "( 1 ) -> ( 2 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> ( 9 ) -> null"
+  );
+  linkedList.removeAt(linkedList.size() - 1); // Remove tail node
+  assertEquals(
+    linkedList.toString(),
+    "( 1 ) -> ( 2 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> null"
+  );
+  linkedList.removeAt(linkedList.size()); // Does nothing when index exceeds size
+  assertEquals(
+    linkedList.toString(),
+    "( 1 ) -> ( 2 ) -> ( 4 ) -> ( 5 ) -> ( 6 ) -> ( 7 ) -> ( 8 ) -> null"
+  );
 });
