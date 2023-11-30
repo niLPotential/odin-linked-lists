@@ -139,12 +139,10 @@ export function createLinkedList() {
   }
 
   function insertAt(value, index) {
-    if (index < 0) {
+    if (index < 0 || index > this.size()) {
       return;
     }
-    if (this.size() < index) {
-      return;
-    }
+
     const newNode = createNode();
     newNode.setValue(value);
     if (index === 0) {
@@ -157,14 +155,11 @@ export function createLinkedList() {
   }
 
   function removeAt(index) {
-    if (index < 0) {
+    if (index < 0 || index > this.size()) {
       return;
     }
     if (index === 0) {
       headNode = this.at(1);
-      return;
-    }
-    if (this.size() < index) {
       return;
     }
 
