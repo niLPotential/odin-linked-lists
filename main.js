@@ -61,6 +61,9 @@ export function createLinkedList() {
   }
 
   function pop() {
+    if (this.head() === null) {
+      return null;
+    }
     let previousNode = null;
     let node = this.head();
     while (node.getNextNode() !== null) {
@@ -72,6 +75,9 @@ export function createLinkedList() {
   }
 
   function contains(value) {
+    if (this.head() === null) {
+      return false;
+    }
     let node = this.head();
     if (node.getValue() === value) {
       return true;
@@ -87,6 +93,9 @@ export function createLinkedList() {
   }
 
   function find(value) {
+    if (this.head() === null) {
+      return null;
+    }
     let node = this.head();
     if (node.getValue() === value) {
       return 0;
@@ -103,6 +112,9 @@ export function createLinkedList() {
   }
 
   function toString() {
+    if (this.head() === null) {
+      return "null";
+    }
     let str = "";
     let node = this.head();
     str += `( ${node.getValue()} ) -> `;
